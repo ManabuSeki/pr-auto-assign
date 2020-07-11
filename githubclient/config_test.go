@@ -4,6 +4,8 @@ import (
 	"context"
 	"net/http"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestFetchConfig(t *testing.T) {
@@ -16,14 +18,18 @@ func TestFetchConfig(t *testing.T) {
 			http.ServeFile(w, r, "./testdata/fetch_config.json")
 		})
 
-		got, err := client.FetchConfig(context.Background(), "o", "r", "p")
+		got, err := client.FetchConfig(context.Background(), "o", "r", "p", "dummy")
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		want := "Hello, world!"
-		if want != got {
-			t.Errorf("unexpected config want %s got %s", want, got)
+		want := &ReviewConfig{
+			MustReviewers:     []string{"reviewerA"},
+			Reviewers:         []string{"reviewerA", "reviewerB", "reviewerC"},
+			NumberOfReviewers: 2,
+		}
+		if diff := cmp.Diff(want, got); diff != "" {
+			t.Errorf("review config mismatch(-want +got):\n%s", diff)
 		}
 	})
 }
