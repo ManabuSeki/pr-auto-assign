@@ -39,6 +39,11 @@ func main() {
 		log.Errorf("CI_CONFIG_PATH is missing")
 		errCount++
 	}
+	ref := os.Getenv("CI_REPO_REF")
+	if ref == "" {
+		log.Errorf("CI_REPO_REF is missing")
+		errCount++
+	}
 	tmpID := os.Getenv("CI_PULL_REQUEST_ID")
 	if tmpID == "" {
 		log.Errorf("CI_PULL_REQUEST_ID is missing")
@@ -56,7 +61,7 @@ func main() {
 	ctx := context.Background()
 	rand.Seed(time.Now().UnixNano())
 	client := githubclient.NewClient(ctx, token)
-	config, err := client.FetchConfig(ctx, own, repo, configPath, token)
+	config, err := client.FetchConfig(ctx, own, repo, configPath, ref)
 	if err != nil {
 		panic(err)
 	}
