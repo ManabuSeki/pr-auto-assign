@@ -8,7 +8,7 @@
     "git_url": "https://api.github.com/repos/ManabuSeki/pr-auto-assign/git/blobs/75da977e4cb6dfbb76c98f405b5a3cab69819b3d",
     "download_url": "https://raw.githubusercontent.com/ManabuSeki/pr-auto-assign/master/.github/auto_assign.yml",
     "type": "file",
-    "content": "SGVsbG8sIHdvcmxkIQ==\n",
+    "content": "bXVzdF9yZXZpZXdlcnM6CiAgLSByZXZpZXdlckEKcmV2aWV3ZXJzOgogIC0g\ncmV2aWV3ZXJBCiAgLSByZXZpZXdlckIKICAtIHJldmlld2VyQwpudW1iZXJf\nb2ZfcmV2aWV3ZXJzOiAyCg==\n",
     "encoding": "base64",
     "_links": {
         "self": "https://api.github.com/repos/ManabuSeki/pr-auto-assign/contents/.github/auto_assign.yml?ref=master",
