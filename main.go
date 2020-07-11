@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"m/githubclient"
 	"math/rand"
 	"os"
+	"pr_auto_assign/githubclient"
 	"strconv"
 	"time"
 

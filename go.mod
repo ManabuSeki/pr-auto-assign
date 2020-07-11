@@ -1,4 +1,4 @@
-module m
+module pr_auto_assign
 
 go 1.14
 
