@@ -11,7 +11,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+var (
+	version string
+)
+
 func main() {
+	log.Infoln("pr_auto_assign version %s", version)
 	var errCount int
 	token := os.Getenv("GITHUB_TOKEN")
 	if token == "" {
