@@ -50,7 +50,7 @@ func main() {
 	}
 
 	if errCount != 0 {
-		log.Error("failed to initialize action, error count: %d", errCount)
+		log.Errorf("failed to initialize action, error count: %d", errCount)
 	}
 
 	ctx := context.Background()
