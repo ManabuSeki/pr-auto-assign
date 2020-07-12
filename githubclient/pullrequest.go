@@ -2,8 +2,10 @@ package githubclient
 
 import (
 	"context"
+	"strings"
 
 	"github.com/google/go-github/v32/github"
+	log "github.com/sirupsen/logrus"
 )
 
 func (c *Client) HandlePullRequest(ctx context.Context, owner, repo string, prID int, config *ReviewConfig) error {
@@ -81,5 +83,6 @@ func (c *Client) addReviewers(ctx context.Context, owner, repo string, prID int,
 	if err != nil {
 		return err
 	}
+	log.Infof("Added reviewers to PR #%d: %s", prID, strings.Join(reviewers, ","))
 	return nil
 }
