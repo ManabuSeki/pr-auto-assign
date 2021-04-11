@@ -5,23 +5,22 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - main: .
+  - main: ./main.go
     binary: pr-auto-assign
     goos:
       - linux
       - darwin
-  goarch:
-    - amd64
     env:
       - CGO_ENABLED=0
+
 archives:
-  - format: zip
-  - name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}'
+  - name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
     replacements:
       darwin: darwin
       linux: linux
       windows: windows
       386: i386
       amd64: x86_64
+    format: zip
 release:
   prerelease: auto
