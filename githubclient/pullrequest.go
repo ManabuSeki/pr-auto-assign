@@ -20,6 +20,13 @@ func (c *Client) HandlePullRequest(ctx context.Context, owner, repo string, prID
 	if err := c.addReviewers(ctx, owner, repo, prID, reviewer); err != nil {
 		return err
 	}
+	// set assignees
+	if config.AddAssignees {
+		err := c.addAssignees(ctx, owner, repo, prID, *pr.GetUser().Login)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -39,6 +46,7 @@ func (c *Client) removeCreateUser(ctx context.Context, config *ReviewConfig, use
 		MustReviewers:     mustReviewer,
 		Reviewers:         Reviewer,
 		NumberOfReviewers: config.NumberOfReviewers,
+		AddAssignees:      config.AddAssignees,
 	}
 }
 
@@ -84,5 +92,14 @@ func (c *Client) addReviewers(ctx context.Context, owner, repo string, prID int,
 		return err
 	}
 	log.Infof("Added reviewers to PR #%d: %s", prID, strings.Join(reviewers, ","))
+	return nil
+}
+
+func (c *Client) addAssignees(ctx context.Context, owner, repo string, prID int, user string) error {
+	_, _, err := c.client.Issues.AddAssignees(ctx, owner, repo, prID, []string{user})
+	if err != nil {
+		return err
+	}
+	log.Infof("Added assignees to PR #%d: %s", prID, user)
 	return nil
 }

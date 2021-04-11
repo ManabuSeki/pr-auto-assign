@@ -13,6 +13,7 @@ type ReviewConfig struct {
 	MustReviewers     []string `yaml:"must_reviewers"`
 	Reviewers         []string `yaml:"reviewers"`
 	NumberOfReviewers int      `yaml:"number_of_reviewers"`
+	AddAssignees      bool     `yaml:"add_assignees"`
 }
 
 // FetchConfig fetch yaml config
