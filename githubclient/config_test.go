@@ -27,6 +27,7 @@ func TestFetchConfig(t *testing.T) {
 			MustReviewers:     []string{"reviewerA"},
 			Reviewers:         []string{"reviewerA", "reviewerB", "reviewerC"},
 			NumberOfReviewers: 2,
+			AddAssignees:      true,
 		}
 		if diff := cmp.Diff(want, got); diff != "" {
 			t.Errorf("review config mismatch(-want +got):\n%s", diff)
