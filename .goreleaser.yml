@@ -1,4 +1,4 @@
-project_name: pr-auto-assign
+project_name: pr_auto_assign
 env:
   - GO111MODULE=on
 before:
@@ -6,7 +6,7 @@ before:
     - go mod tidy
 builds:
   - main: ./main.go
-    binary: pr-auto-assign
+    binary: pr_auto_assign
     goos:
       - linux
       - darwin
