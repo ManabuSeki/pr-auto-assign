@@ -2,6 +2,7 @@ package githubclient
 
 import (
 	"context"
+	"net/http"
 	"strings"
 
 	"github.com/google/go-github/v32/github"
@@ -96,8 +97,12 @@ func (c *Client) addReviewers(ctx context.Context, owner, repo string, prID int,
 }
 
 func (c *Client) addAssignees(ctx context.Context, owner, repo string, prID int, user string) error {
-	_, _, err := c.client.Issues.AddAssignees(ctx, owner, repo, prID, []string{user})
+	_, resp, err := c.client.Issues.AddAssignees(ctx, owner, repo, prID, []string{user})
 	if err != nil {
+		if resp.StatusCode == http.StatusNotFound {
+			log.Warn("assignees user not found.")
+			return nil
+		}
 		return err
 	}
 	log.Infof("Added assignees to PR #%d: %s", prID, user)
